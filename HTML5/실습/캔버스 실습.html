@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>캔버스 실습</title>
+</head>
+<body>
+  <canvas id="Canvas" width="300" height="200" style="border: 1px solid red;">
+  </canvas>
+  <script>
+    let paper = document.getElementById("Canvas");
+    let context = paper.getContext("2d");
+    let grd = context.createLinearGradient(0,100,170,100);
+    grd.addColorStop(0, "blue");
+    grd.addColorStop(1, "white");
+
+    context.fillStyle = grd;
+    context.fillRect(10,10,150,80);
+
+    context.font="30px Arial";
+    context.fillStyle="#FFFFFF";
+    context.fillText("CANVAS", 15,50)
+  </script>
+</body>
+</html>

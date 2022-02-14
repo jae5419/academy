@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>캔버스</title>
+</head>
+<body>
+  <h1>canvas 확인</h1>
+  <figure>
+    <img id="naver" src="../HTML기초/img/naver.png">
+  </figure>
+  <canvas id="myCanvas" width="300px" height="500px" style="border: 3px solid black;">
+  </canvas>
+
+  <h1>SVG 확인</h1>
+  <svg width="300" height="200" style="border: 3px solid black;">
+    <line x1="50" y1="0" x2="100" y2="200" stroke="orange" stroke-width="5px"></line>
+    <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow"></circle>
+    <rect x="150" y="10" width="140" height="80"
+    style="fill: #FFFF00; stroke-width: 3; stroke: #0000FF;"></rect>
+    <rect x="170" y="50" rx="25" ry="25" width="110" height="80"
+    style="fill: #FF0000; stroke: black; stroke-width: 5; opacity: 0.7;"></rect>
+  </svg>
+  <script>
+    let paper = document.getElementById("myCanvas");
+    let context = paper.getContext("2d");
+    context.fillStyle="#FF0000"
+    context.fillRect(0,0,150,75);
+
+    //원은 그리기전에 패스를 초기화한다.
+    context.beginPath();
+    context.arc(50,100,10,0,2*Math.PI);
+    context.fill();
+    context.strokeStyle="#FFFF00";
+    context.stroke();
+    /*
+    패스를 지정한 후에 선을 그린다.
+    */
+
+    context.moveTo(0,0); //시작점
+    context.lineTo(150,75); //끝점
+    context.stroke();
+
+    context.font="30px Arial";
+    context.fillStyle="#0000FF";
+    context.fillText("CANVAS", 15,47.5); //작성할 내용과 x(시작위치), y(문자의 바닥)
+
+    //그라디언트 유형 : 선형/원형
+    let grd = context.createRadialGradient(0,200,5,0,200,150);
+    //Radial : 원형 (시작 원의 x, y, 반지름, 끝나는 원의 x, y, 반지름)
+    grd.addColorStop(0,"red");
+    grd.addColorStop(1,"white");
+
+    let grdline = context.createLinearGradient(0,200,150,200);
+    //Linear : 선형 (x0, y0, x1, y1)
+    grdline.addColorStop(0,"blue");
+    grdline.addColorStop(1,"yellow");
+
+    context.strokeStyle = grdline;
+    context.rect(0,120,150,20);
+    context.stroke();
+
+    context.fillStyle = grdline;
+    context.fillRect(0,150,150,50);
+
+    let picture = document.getElementById("naver");
+    context.drawImage(picture, 10,250);
+  </script>
+</body>
+</html>
